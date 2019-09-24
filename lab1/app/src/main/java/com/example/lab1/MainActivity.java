@@ -3,21 +3,67 @@ package com.example.lab1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.telephony.TelephonyManager;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override  protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         showVersion();
+    }
+
+    public void onButtonClick(View view)
+    {
         showImei();
+    }
+
+    public void explanation(){
+        final Handler handler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message mesg)
+            {
+                throw new RuntimeException();
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Lack of permissions!")
+                .setMessage("We need access to your phone state to know your IMEI.")
+                .setCancelable(false)
+                .setNegativeButton("Got it",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                handler.sendMessage(handler.obtainMessage());
+                                dialog.cancel();
+
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+        /*while (!userGotIt[0])
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
+        try{ Looper.loop(); }
+        catch(RuntimeException e){}
     }
 
     protected void showVersion() {
@@ -27,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void showImei() {
         TextView imei = (TextView) findViewById(R.id.imeiLabel);
-
         if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
         {
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -36,14 +81,15 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            imei.setText("Permission denied");
-            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE))
-            {
-                Toast.makeText(this,
-                        "This permission is needed to show your IMEI.",
-                        Toast.LENGTH_SHORT).show();
-            }
+            explanation();
+            imei.setText("unknown");
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 2);
+
+            /*if (shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE))
+            {
+
+                //Toast.makeText(this, "This permission is needed to show your IMEI.", Toast.LENGTH_LONG).show();
+            }*/
         }
     }
 

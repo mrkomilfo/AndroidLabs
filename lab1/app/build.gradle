@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.ajoberstar.grgit'
 
 android {
     compileSdkVersion 29
@@ -7,8 +8,8 @@ android {
         applicationId "com.example.lab1"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode "${grgit.open(currentDir: projectDir).describe().replaceAll("[^0-9]", "")}".toInteger()
+        versionName "${grgit.open(currentDir: projectDir).describe()}".substring(1)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
