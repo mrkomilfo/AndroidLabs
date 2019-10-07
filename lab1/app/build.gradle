@@ -8,8 +8,35 @@ android {
         applicationId "com.example.lab1"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode "${grgit.open(currentDir: projectDir).describe().replaceAll("[^0-9]", "")}".toInteger()
-        versionName "${grgit.open(currentDir: projectDir).describe()}".substring(1)
+
+        /*def minor = "${grgit.open(currentDir: projectDir).tag.list().size - 1}"
+        def headPatch = "${grgit.log(includes: ['HEAD']).size()}"
+        def tagPatch = "${grgit.log(includes: [grgit.describe(tags: true).split('-')[0]]).size()}"
+        int patch = headPatch.toInteger() - tagPatch.toInteger()
+        versionCode patch + minor.toInteger() * 1000
+        versionName "1.${minor}.${patch}"*/
+
+
+        /*versionCode "${grgit.open(currentDir: projectDir).describe().replaceAll("[^0-9]", "")}".toInteger()
+        versionName "${grgit.open(currentDir: projectDir).describe()}".substring(1)*/
+
+        def version = "${grgit.open(currentDir: projectDir).describe()}"
+        int major = version.substring(version.indexOf('v')+1, version.indexOf('.')).toInteger()
+        int minor = 0
+        int patch = 0
+        if (version.indexOf('-') == -1)
+        {
+            minor = version.substring(version.indexOf('.')+1, version.length()).toInteger()
+            versionName "${major}.${minor}"
+        }
+        else
+        {
+            minor = version.substring(version.indexOf('.')+1, version.indexOf('-')).toInteger()
+            patch = version.substring(version.indexOf('-')+1, version.lastIndexOf('-')).toInteger()
+            versionName "${major}.${minor}.${patch}"
+        }
+        versionCode patch + minor * 100 + major * 10000
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,4 +55,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     androidTestImplementation 'androidx.test:rules:1.2.0-beta01'
+    //implementation 'com.android.support:appcompat-v7:28.0.0'
 }

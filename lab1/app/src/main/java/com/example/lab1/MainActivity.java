@@ -54,14 +54,6 @@ public class MainActivity extends AppCompatActivity {
                         });
         AlertDialog alert = builder.create();
         alert.show();
-        /*while (!userGotIt[0])
-        {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
         try{ Looper.loop(); }
         catch(RuntimeException e){}
     }
@@ -84,12 +76,6 @@ public class MainActivity extends AppCompatActivity {
             explanation();
             imei.setText("unknown");
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 2);
-
-            /*if (shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE))
-            {
-
-                //Toast.makeText(this, "This permission is needed to show your IMEI.", Toast.LENGTH_LONG).show();
-            }*/
         }
     }
 
