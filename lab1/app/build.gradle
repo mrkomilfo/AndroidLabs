@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.ajoberstar.grgit'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\Android\\lab1\\keyStore.jks')
+            storePassword 'Valentin17'
+            keyPassword 'Valentin17'
+            keyAlias = 'versionApp'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -14,10 +22,9 @@ android {
         def tagPatch = "${grgit.log(includes: [grgit.describe(tags: true).split('-')[0]]).size()}"
         int patch = headPatch.toInteger() - tagPatch.toInteger()
         versionCode patch + minor.toInteger() * 1000
-        versionName "1.${minor}.${patch}"*/
+        versionName "1.${minor}.${patch}"
 
-
-        /*versionCode "${grgit.open(currentDir: projectDir).describe().replaceAll("[^0-9]", "")}".toInteger()
+        versionCode "${grgit.open(currentDir: projectDir).describe().replaceAll("[^0-9]", "")}".toInteger()
         versionName "${grgit.open(currentDir: projectDir).describe()}".substring(1)*/
 
         def version = "${grgit.open(currentDir: projectDir).describe()}"
@@ -43,6 +50,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

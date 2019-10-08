@@ -32,30 +32,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void explanation(){
-        final Handler handler = new Handler()
-        {
-            @Override
-            public void handleMessage(Message mesg)
-            {
-                throw new RuntimeException();
-            }
-        };
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Lack of permissions!")
                 .setMessage("We need access to your phone state to know your IMEI.")
                 .setCancelable(false)
-                .setNegativeButton("Got it",
+                .setPositiveButton("Got it",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                handler.sendMessage(handler.obtainMessage());
+                                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 2);
                                 dialog.cancel();
 
                             }
                         });
         AlertDialog alert = builder.create();
         alert.show();
-        try{ Looper.loop(); }
-        catch(RuntimeException e){}
     }
 
     protected void showVersion() {
@@ -75,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         {
             explanation();
             imei.setText("unknown");
-            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 2);
         }
     }
 
