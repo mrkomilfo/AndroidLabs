@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textViewSecondary"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="TextView"
+        android:textAlignment="textEnd"/>
+
+    <TextView
+        android:id="@+id/textViewPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="TextView"
+        android:textAlignment="textEnd"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <fragment
+            android:id="@+id/extra_fr_place"
+            android:name="com.example.lab2.ExtraFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <fragment
+            android:id="@+id/main_fr_place"
+            android:name="com.example.lab2.MainFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5" />
+    </LinearLayout>
+
+</LinearLayout>
