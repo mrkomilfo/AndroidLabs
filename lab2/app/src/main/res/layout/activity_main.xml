@@ -5,53 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
-
-    <TextView
-        android:id="@+id/textViewSecondary"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:text="TextView"
-        android:textAlignment="textEnd" />
+    android:weightSum="9"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textViewPrimary"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:text="TextView"
-        android:textAlignment="textEnd" />
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:textAlignment="textEnd"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/buttonMode"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0"
-        android:text="change mod"
-        android:onClick="onChmodClick"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:onClick="onChmodClick"
+        android:text="change mod" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
         android:orientation="horizontal"
         android:weightSum="7">
+
         <LinearLayout
             android:id="@+id/extra_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="0">
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
             <fragment
                 android:id="@+id/extra_fr_place"
                 android:name="com.example.lab2.ExtraFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/main_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="7">
+            android:layout_weight="7"
+            android:orientation="horizontal">
+
             <fragment
                 android:id="@+id/main_fr_place"
                 android:name="com.example.lab2.MainFragment"

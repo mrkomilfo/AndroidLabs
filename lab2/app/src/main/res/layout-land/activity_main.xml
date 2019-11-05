@@ -5,25 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
-
-    <TextView
-        android:id="@+id/textViewSecondary"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="TextView"
-        android:textAlignment="textEnd"/>
+    android:weightSum="10"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textViewPrimary"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="0dp"
+        android:layout_weight="4"
         android:text="TextView"
-        android:textAlignment="textEnd"/>
+        android:textAlignment="textEnd"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
         android:orientation="horizontal"
         android:weightSum="7">
 

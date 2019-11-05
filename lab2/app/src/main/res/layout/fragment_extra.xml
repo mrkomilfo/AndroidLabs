@@ -55,11 +55,11 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonTg"
+                android:id="@+id/buttonTan"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="tg" />
+                android:text="tan" />
 
             <Button
                 android:id="@+id/buttonLn"
