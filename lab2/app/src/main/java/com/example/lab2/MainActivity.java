@@ -1,7 +1,9 @@
 package com.example.lab2;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.util.Pair;
@@ -17,6 +19,21 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         setContentView(R.layout.activity_main);
         primary = findViewById(R.id.textViewPrimary);
         primary.setText("0");
+
+        if (Constants.type == Constants.Type.DEMO){
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                findViewById(R.id.buttonMode).setEnabled(false);
+            else{
+                findViewById(R.id.buttonPow).setEnabled(false);
+                findViewById(R.id.buttonSin).setEnabled(false);
+                findViewById(R.id.buttonCos).setEnabled(false);
+                findViewById(R.id.buttonTan).setEnabled(false);
+                findViewById(R.id.buttonLeftBracket).setEnabled(false);
+                findViewById(R.id.buttonRightBracket).setEnabled(false);
+                findViewById(R.id.buttonLn).setEnabled(false);
+                findViewById(R.id.buttonSqrt).setEnabled(false);
+            }
+        }
     }
 
     private boolean scientific = false;
@@ -222,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         }
         else {
             String prim = (String)primary.getText();
-            if (last(prim, "0") && dotIsRelevant(prim))
+            if (prim.length() == 1 && last(prim, "0"))
             {
                 return;
             }
