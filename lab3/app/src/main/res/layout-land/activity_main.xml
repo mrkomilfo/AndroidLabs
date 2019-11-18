@@ -7,13 +7,6 @@
     android:background="#d1d1d1"
     tools:context=".MainActivity">
 
-    <!--<android.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary">
-    </android.widget.Toolbar>-->
-
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
@@ -24,17 +17,19 @@
         android:layout_margin="8dp"
         android:padding="5dp"/>
 
-    <ListView
-        android:id="@+id/notesListView"
+    <GridView
+        android:id="@+id/notesGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#d1d1d1"
         android:cacheColorHint="#00000000"
-        android:dividerHeight="10dp"
-        android:divider="#d1d1d1"
+        android:gravity="center|bottom"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:numColumns="2"
         android:layout_marginTop="60dp"
-        android:background="#d1d1d1"/>
-        <!--android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"-->
+        android:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -43,6 +38,4 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_add" />
-
-
 </FrameLayout>
