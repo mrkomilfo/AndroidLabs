@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:layout_margin="10dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/noteContentTextView"
@@ -20,7 +21,8 @@
         android:layout_below="@id/noteTitleTextView"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/noteDateTextView"
@@ -30,5 +32,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:textStyle="italic"/>
+        android:textStyle="italic"
+        android:singleLine="true"/>
 </LinearLayout>

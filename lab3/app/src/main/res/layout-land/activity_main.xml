@@ -7,29 +7,42 @@
     android:background="#d1d1d1"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:background="#FFFFFF"
-        android:layout_margin="8dp"
-        android:padding="5dp"/>
-
-    <GridView
-        android:id="@+id/notesGridView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d1d1d1"
-        android:cacheColorHint="#00000000"
-        android:gravity="center|bottom"
-        android:stretchMode="columnWidth"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        android:numColumns="2"
-        android:layout_marginTop="60dp"
-        android:visibility="visible" />
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"></androidx.appcompat.widget.Toolbar>
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_margin="8dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="5dp" />
+
+        <GridView
+            android:id="@+id/notesGridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#d1d1d1"
+            android:cacheColorHint="#00000000"
+            android:gravity="center|bottom"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp"
+            android:visibility="visible">
+
+        </GridView>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

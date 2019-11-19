@@ -1,15 +1,18 @@
 package com.example.lab3;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -19,21 +22,28 @@ import android.widget.ListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView list;
     private GridView grid;
     private ArrayList<Note> notes;
+    private DBHelper dbHelper;
+    private NoteAdapter adapter;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadNotes();
-        final NoteAdapter adapter = new NoteAdapter(this, notes);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        loadDB();
+        adapter = new NoteAdapter(this, notes);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             list = (ListView) findViewById(R.id.notesListView);
@@ -46,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplication(), EditNoteActivity.class);
                             intent.putExtra("id", note.getId());
                             intent.putExtra("header", note.getHeader());
+                            intent.putExtra("tags", note.tagsInString());
                             intent.putExtra("content", note.getContent());
                             startActivity(intent);
 
@@ -64,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("id", note.getId());
                             intent.putExtra("header", note.getHeader());
                             intent.putExtra("content", note.getContent());
+                            intent.putExtra("tags", note.tagsInString());
                             startActivity(intent);
 
                         }
@@ -98,43 +110,55 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView)searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
-    }*/
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void loadNotes()
+        switch (item.getItemId())
+        {
+            case R.id.header_sort:{
+                Collections.sort(notes);
+                adapter.notifyDataSetChanged();
+                break;
+            }
+            case R.id.date_sort:{
+                Collections.sort(notes, new Comparator<Note>() {
+                    @Override
+                    public int compare(Note n1, Note n2) {
+                        return (int)(n1.getDate().getTime() - n2.getDate().getTime());
+                    }
+                });
+                adapter.notifyDataSetChanged();
+                break;
+            }
+        }
+        return true;
+    }
+
+    public void loadDB()
     {
-        notes = new ArrayList<Note>(){{
-            add(new Note(1,"Header 1", "Note 1"));
-            add(new Note(2,"Header 2", "Note 2"));
-            add(new Note(3,"Header 3", "Note 3"));
-            add(new Note(4,"Header 4", "Note 4"));
-            add(new Note(5,"Header 5", "Note 5"));
-            add(new Note(6,"Header 6", "Note 6"));
-        }};
-        notes.get(0).setTags(new ArrayList<String>(){{add("a"); add("g");}});
-        notes.get(1).setTags(new ArrayList<String>(){{add("a"); add("b");}});
-        notes.get(2).setTags(new ArrayList<String>(){{add("b"); add("c");}});
+        dbHelper = new DBHelper(this);
+        notes = new ArrayList<Note>();
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        Cursor cursor = database.query(DBHelper.TABLE_NOTES, null, null, null, null, null, null);
+        if (cursor.moveToFirst()){
+            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
+            int headerIndex = cursor.getColumnIndex(DBHelper.KEY_HEADER);
+            int tagsIndex = cursor.getColumnIndex(DBHelper.KEY_TAGS);
+            int contentIndex = cursor.getColumnIndex(DBHelper.KEY_CONTENT);
+            int timeIndex = cursor.getColumnIndex(DBHelper.KEY_DATE);
+            do{
+                notes.add(new Note(cursor.getInt(idIndex), cursor.getString(headerIndex),
+                        cursor.getString(contentIndex), cursor.getString(tagsIndex),
+                        new Date(cursor.getLong(timeIndex))));
+
+            } while(cursor.moveToNext());
+        }
+        cursor.close();
     }
 }

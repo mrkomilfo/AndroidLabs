@@ -9,6 +9,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +50,12 @@ public class NoteAdapter extends BaseAdapter implements Filterable {
         header.setText(getNote(position).getHeader());
         TextView content = view.findViewById(R.id.noteContentTextView);
         content.setText(getNote(position).getContent());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+        String strDate = formatter.format(getNote(position).getDate());
+
         TextView date = view.findViewById(R.id.noteDateTextView);
-        date.setText(getNote(position).getDate().toString());
+        date.setText(strDate);
         return view;
     }
 
@@ -80,7 +85,7 @@ public class NoteAdapter extends BaseAdapter implements Filterable {
                     int count = list.size();
                     final List<Note> filterResultsData = new ArrayList<Note>(count);
 
-                    String[] words = charSequence.toString().toLowerCase().split(" ");
+                    String[] words = charSequence.toString().toLowerCase().split("\\s+");
                     for(Note note : list)
                     {
                         for (String word: words)

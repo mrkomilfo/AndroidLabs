@@ -8,29 +8,47 @@ import androidx.annotation.RequiresApi;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Calendar;
 
-public class Note {
-    private long id;
+public class Note implements Comparable<Note> {
+    private int id;
     private String header;
     private String content;
     private ArrayList<String> tags;
-    private LocalDate date;
+    private Date date;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Note (long id, String header, String content)
+    public Note (int id, String header, String content)
     {
         this.id = id;
         this.header = header;
         this.content = content;
-        this.date = LocalDate.now();
+        this.date = Calendar.getInstance().getTime();
     }
 
-    public Note (long id, String header, String content, LocalDate date)
+    public Note (int id, String header, String content, Date date)
     {
         this.id = id;
         this.header = header;
         this.content = content;
+        this.date = date;
+    }
+
+    public Note (int id, String header, String content, String tags)
+    {
+        this.id = id;
+        this.header = header;
+        this.content = content;
+        this.tags = new ArrayList<>(Arrays.asList(tags.split("\\s+")));
+    }
+
+    public Note (int id, String header, String content, String tags, Date date)
+    {
+        this.id = id;
+        this.header = header;
+        this.content = content;
+        this.tags = new ArrayList<>(Arrays.asList(tags.split("\\s+")));
         this.date = date;
     }
 
@@ -58,19 +76,19 @@ public class Note {
         this.tags = tags;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -80,10 +98,14 @@ public class Note {
         for (String tag: this.tags) {
             str.append(tag).append(" ");
         }
-        if (str.length()>0)
-        {
-            str.substring(0,str.length()-1);
+        if (str.length()>0) {
+            str.deleteCharAt(str.length()-1);
         }
         return str.toString();
+    }
+
+    @Override
+    public int compareTo(Note n) {
+        return this.header.compareTo(n.header);
     }
 }

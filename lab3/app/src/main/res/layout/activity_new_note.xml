@@ -23,7 +23,7 @@
         android:ems="10"/>
 
     <EditText
-        android:id="@+id/tags_list"
+        android:id="@+id/note_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tags"
@@ -37,6 +37,7 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:gravity="top"
+        android:hint="Share your thoughts"
         android:paddingHorizontal="10dp"/>
 
 </LinearLayout>
