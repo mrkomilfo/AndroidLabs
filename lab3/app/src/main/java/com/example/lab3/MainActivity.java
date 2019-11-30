@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Note> notes;
     private DBHelper dbHelper;
     private NoteAdapter adapter;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
+            list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> arg0, View view, int i, long l) {
+                    Note note = notes.get(i);
+                    db.delete(DBHelper.TABLE_NOTES, DBHelper.KEY_ID + "=" + note.getId(), null);
+                    notes.remove(i);
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+            });
         }
         else{
             grid = (GridView) findViewById(R.id.notesGridView);
@@ -80,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
+            grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> arg0, View view, int i, long l) {
+                    Note note = notes.get(i);
+                    db.delete(DBHelper.TABLE_NOTES, DBHelper.KEY_ID + "=" + note.getId(), null);
+                    notes.remove(i);
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+            });
         }
 
         EditText search = (EditText)findViewById(R.id.searchEditText);
@@ -144,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
     {
         dbHelper = new DBHelper(this);
         notes = new ArrayList<Note>();
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.query(DBHelper.TABLE_NOTES, null, null, null, null, null, null);
+        db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query(DBHelper.TABLE_NOTES, null, null, null, null, null, null);
         if (cursor.moveToFirst()){
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
             int headerIndex = cursor.getColumnIndex(DBHelper.KEY_HEADER);

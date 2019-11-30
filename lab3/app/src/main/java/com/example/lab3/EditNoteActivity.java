@@ -73,7 +73,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 break;
             }
             case R.id.delete:{
-                db.delete(dbHelper.TABLE_NOTES, DBHelper.KEY_ID + "=" + id, null);
+                db.delete(DBHelper.TABLE_NOTES, DBHelper.KEY_ID + "=" + id, null);
             }
         }
         Intent intent = new Intent(getApplication(), MainActivity.class);

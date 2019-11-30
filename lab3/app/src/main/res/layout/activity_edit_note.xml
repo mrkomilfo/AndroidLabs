@@ -30,7 +30,8 @@
         android:hint="Tags"
         android:paddingHorizontal="10dp"
         android:inputType="textNoSuggestions"
-        android:ems="10" />
+        android:ems="10"
+        android:textColor="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/note_content"

@@ -51,6 +51,11 @@ public class NewNoteActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.save:{
+                if(content.getText().length() == 0)
+                {
+                    break;
+                }
+
                 DBHelper dbHelper = new DBHelper(this);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
@@ -64,15 +69,14 @@ public class NewNoteActivity extends AppCompatActivity {
                 contentValues.put(DBHelper.KEY_CONTENT, content.getText().toString());
                 contentValues.put(DBHelper.KEY_DATE, date.getTime());
                 db.insert(DBHelper.TABLE_NOTES, null, contentValues);
+                break;
             }
             case R.id.delete:{
 
             }
-            default:{
-                Intent intent = new Intent(getApplication(), MainActivity.class);
-                startActivity(intent);
-            }
         }
+        Intent intent = new Intent(getApplication(), MainActivity.class);
+        startActivity(intent);
         return true;
     }
 
