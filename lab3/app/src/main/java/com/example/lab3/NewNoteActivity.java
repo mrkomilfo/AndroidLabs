@@ -75,8 +75,9 @@ public class NewNoteActivity extends AppCompatActivity {
 
             }
         }
-        Intent intent = new Intent(getApplication(), MainActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(getApplication(), MainActivity.class);
+        startActivity(intent);*/
+        finish();
         return true;
     }
 

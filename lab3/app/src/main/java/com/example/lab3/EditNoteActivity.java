@@ -76,8 +76,9 @@ public class EditNoteActivity extends AppCompatActivity {
                 db.delete(DBHelper.TABLE_NOTES, DBHelper.KEY_ID + "=" + id, null);
             }
         }
-        Intent intent = new Intent(getApplication(), MainActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(getApplication(), MainActivity.class);
+        startActivity(intent);*/
+        finish();
         return true;
     }
 }

@@ -36,15 +36,25 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase db;
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        loadDB();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dbHelper = new DBHelper(this);
+        notes = new ArrayList<Note>();
+        db = dbHelper.getWritableDatabase();
+        adapter = new NoteAdapter(this, notes);
+        //loadDB();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        loadDB();
-        adapter = new NoteAdapter(this, notes);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             list = (ListView) findViewById(R.id.notesListView);
@@ -163,10 +173,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadDB()
     {
-        dbHelper = new DBHelper(this);
-        notes = new ArrayList<Note>();
-        db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query(DBHelper.TABLE_NOTES, null, null, null, null, null, null);
+        notes.clear();
         if (cursor.moveToFirst()){
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
             int headerIndex = cursor.getColumnIndex(DBHelper.KEY_HEADER);

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">lab4</string>
+    <string name="image">Image</string>
+    <string name="title">Title</string>
+    <string name="preview">Preview</string>
+    <string name="date">Date</string>
+    <string name="offline">Связь с сетью потеряна</string>
+    <string name="online">Подключение восстановлено</string>
+    <string name="rss">RSS-канал</string>
+    <string name="default_url">"https://news.tut.by/rss/index.rss"</string>
+    <string name="no_rss">RSS-канал не выбран</string>
+    <string name="rss_button">RSS button</string>
+</resources>
