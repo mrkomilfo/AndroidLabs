@@ -10,12 +10,12 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class DownloadTask extends AsyncTask<Void, Void, Object> {
+public class OnlineLoader extends AsyncTask<Void, Void, Object> {
     private String urlString;
     @SuppressLint("StaticFieldLeak")
     private NetworkActivity context;
 
-    DownloadTask(NetworkActivity context, String urlString){
+    OnlineLoader(NetworkActivity context, String urlString){
         this.context = context;
         this.urlString = urlString;
     }
@@ -36,7 +36,7 @@ public class DownloadTask extends AsyncTask<Void, Void, Object> {
         if(data instanceof IOException)
             context.onError((IOException) data);
         else {
-            new ParseTask(context, (InputStream) data).execute();
+            new Parser(context, (InputStream) data).execute();
         }
     }
 

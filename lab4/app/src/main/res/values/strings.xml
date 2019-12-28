@@ -10,4 +10,5 @@
     <string name="default_url">"https://news.tut.by/rss/index.rss"</string>
     <string name="no_rss">RSS-канал не выбран</string>
     <string name="rss_button">RSS button</string>
+    <string name="info_button">Info button</string>
 </resources>

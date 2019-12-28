@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class LoadTask extends AsyncTask<Void, Void, Object> {
+public class OfflineLoader extends AsyncTask<Void, Void, Object> {
     @SuppressLint("StaticFieldLeak")
     private MainActivity context;
     private static final String filename = "file";
 
-    LoadTask(MainActivity context){
+    OfflineLoader(MainActivity context){
         this.context = context;
     }
 

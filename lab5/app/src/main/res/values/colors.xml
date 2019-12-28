@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/holo_blue_light</color>
+    <color name="colorPrimaryDark">#0077AA</color>
+    <color name="colorAccent">@android:color/holo_orange_light</color>
+    <color name="button">@android:color/white</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="damaged">#FF0000</color>
+    <color name="destroyed">#111111</color>
+</resources>

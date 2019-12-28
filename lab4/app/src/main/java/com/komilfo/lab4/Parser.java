@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Pattern;
 
-public class ParseTask extends AsyncTask<Void, Void, Object> {
+public class Parser extends AsyncTask<Void, Void, Object> {
 
     @SuppressLint("StaticFieldLeak")
     private NetworkActivity context;
     private InputStream stream;
 
-    ParseTask(NetworkActivity context, InputStream stream) {
+    Parser(NetworkActivity context, InputStream stream) {
         this.context = context;
         this.stream = stream;
     }
@@ -39,7 +39,7 @@ public class ParseTask extends AsyncTask<Void, Void, Object> {
             context.onError((Exception) data);
         else {
             context.onGetFeed((Feed) data);
-            new SaveTask(context, (Feed)data).execute();
+            new Saver(context, (Feed)data).execute();
         }
     }
 

@@ -12,13 +12,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class SaveTask extends AsyncTask<Void, Void, Void> {
+public class Saver extends AsyncTask<Void, Void, Void> {
     @SuppressLint("StaticFieldLeak")
     private Context context;
     private Feed feed;
     private static final String filename = "file";
 
-    SaveTask(Context context, Feed feed){
+    Saver(Context context, Feed feed){
         this.context = context;
         this.feed = feed;
     }

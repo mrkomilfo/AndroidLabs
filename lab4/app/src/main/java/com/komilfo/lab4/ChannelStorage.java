@@ -7,11 +7,11 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 import java.util.Set;
 
-class ChannelHistory {
+class ChannelStorage {
     private SharedPreferences preferences;
     private Set<String> defaultSet;
 
-    ChannelHistory(Activity activity){
+    ChannelStorage(Activity activity){
         preferences = activity.getPreferences(Context.MODE_PRIVATE);
         defaultSet = new HashSet<>();
         defaultSet.add(activity.getResources().getString(R.string.default_url));

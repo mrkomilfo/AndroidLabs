@@ -24,7 +24,7 @@ public class MainActivity extends NetworkActivity {
     AutoCompleteTextView rssEdit;
     SwipeRefreshLayout refreshLayout;
     Feed feed;
-    ChannelHistory history;
+    ChannelStorage history;
     ImageButton rssButton;
     boolean focus = false;
 
@@ -52,7 +52,7 @@ public class MainActivity extends NetworkActivity {
         });
         refreshLayout.setRefreshing(true);
 
-        history = new ChannelHistory(this);
+        history = new ChannelStorage(this);
         feedName = findViewById(R.id.rss_name);
         rssEdit = findViewById(R.id.rss_edit);
         rssEdit.setText(rssurl.get());
@@ -115,10 +115,10 @@ public class MainActivity extends NetworkActivity {
 
     void loadFeed(){
         if(isOnline()){
-            new DownloadTask(this, rssEdit.getText().toString()).execute();
+            new OnlineLoader(this, rssEdit.getText().toString()).execute();
         }
         else if(feed == null){
-            new LoadTask(this).execute();
+            new OfflineLoader(this).execute();
             offlineToast.show();
         }
     }
@@ -129,7 +129,7 @@ public class MainActivity extends NetworkActivity {
         feedName.setVisibility(View.VISIBLE);
         rssButton.setImageResource(R.drawable.ic_rss);
         if(!rssurl.get().equals(rssEdit.getText().toString())) {
-            new DownloadTask(this, rssEdit.getText().toString()).execute();
+            new OnlineLoader(this, rssEdit.getText().toString()).execute();
             refreshLayout.setRefreshing(true);
         }
     }
@@ -146,4 +146,13 @@ public class MainActivity extends NetworkActivity {
             rssButton.setImageResource(R.drawable.ic_check);
         }
     }
+
+    public void infoOnClick(View view) {
+        if (feed == null) {
+            return;
+        }
+        Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+        intent.putExtra("Feed", feed);
+        startActivity(intent);
+     }
 }

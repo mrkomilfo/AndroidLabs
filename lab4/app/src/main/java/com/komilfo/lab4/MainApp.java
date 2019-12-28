@@ -6,7 +6,7 @@ import com.squareup.picasso.Cache;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
-public class FeedApp extends Application {
+public class MainApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -14,12 +14,12 @@ public class FeedApp extends Application {
     }
 
     void setPicasso(){
-        /*Picasso picasso = new Picasso.Builder(this)
+        Picasso picasso = new Picasso.Builder(this)
                 .memoryCache(new LruCache(1024 * 1024 * 100) {
                 })
                 .build();
         if(android.os.Debug.isDebuggerConnected())
             picasso.setIndicatorsEnabled(true);
-        Picasso.setSingletonInstance(picasso);*/
+        Picasso.setSingletonInstance(picasso);
     }
 }

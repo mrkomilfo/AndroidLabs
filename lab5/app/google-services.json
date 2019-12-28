@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "756090543173",
+    "firebase_url": "https://komilfo-battleship.firebaseio.com",
+    "project_id": "komilfo-battleship",
+    "storage_bucket": "komilfo-battleship.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756090543173:android:fb86107b63fab4bb19572c",
+        "android_client_info": {
+          "package_name": "com.komilfo.battleship"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756090543173-j3ij7a42mcsspdah5v7be033uhmk3q40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5h80n0-FNS3WIRM5_61bIUAm4k5ykkE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756090543173-j3ij7a42mcsspdah5v7be033uhmk3q40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

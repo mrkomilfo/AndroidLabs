@@ -25,7 +25,8 @@
             android:inputType="textUri"
             android:text="@string/default_url"
             android:textColor="@color/colorAccent"
-            android:layout_marginEnd="48dp"/>
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="48dp"/>
 
         <TextView
             android:id="@+id/rss_name"
@@ -37,7 +38,8 @@
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginEnd="48dp"/>
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="48dp"/>
 
         <ImageButton
             android:id="@+id/rss_button"
@@ -47,6 +49,16 @@
             android:background="#00FFFFFF"
             android:onClick="rssOnClick"
             android:src="@drawable/ic_rss"
+            android:contentDescription="@string/info_button" />
+
+        <ImageButton
+            android:id="@+id/info_button"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#00FFFFFF"
+            android:onClick="infoOnClick"
+            android:src="@drawable/ic_info"
             android:contentDescription="@string/rss_button" />
     </FrameLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
